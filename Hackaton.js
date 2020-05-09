@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, version } from 'react';
 import {
   StyleSheet,
   View,
@@ -12,15 +12,15 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
-  TextInput,
-  Alert
+  TextInput
 } from 'react-native';
 
 //import { LinearGradient } from 'expo-linear-gradient';
 import Input from './src/Components/Forms/InputHack';
 import Avatar from './src/Components/Forms/Avatar';
 import DatePicker from 'react-native-datepicker'
-import { faUser, faEnvelope, faMobile, faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faUser, faEnvelope, faMobile, faCalendar, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 const styles = StyleSheet.create({
     container: {
@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
     containerOptions: {
         position:'absolute',
         backgroundColor: '#FFFFFF',
-        height: '75%',
+        height: '70%',
         width: '90%',
-        marginTop: '35%',
+        marginTop: '40%',
         marginLeft: '5%',
         marginRight: '5%',
         shadowColor: "#000",
@@ -57,6 +57,14 @@ const styles = StyleSheet.create({
         marginTop: '5%',
         fontFamily: 'fantasy',
         fontWeight: 'bold'
+    },
+    contentIconEdit:{
+        flexDirection: 'row',
+        marginBottom: '2%'
+    }
+    ,
+    iconEdit:{
+        marginTop: '4%',
     }
 })
 
@@ -66,21 +74,45 @@ export default class App extends Component {
     constructor(props){
         super(props);
         this.state = {
+          typingNick: false,
           user:'',
           email:'',
           phoneNumber:'',
-          date: ''
+          date: '',
+          userName: 'Your nick',
+          editableNick: false
         }
       }
 
+      focus = (value) => {
+        if(value === 'nick' ) {
+          this.setState({
+            typingNick: true
+          })
+        } 
+      } 
+
+      _editNick = () => {
+          this.setState({
+            editableNick: true,
+            userName: '',            
+            typingNick: true
+          })
+      }
 render(){
-    const { user, email, phoneNumber, date } = this.state;
+    const { user, email, phoneNumber, date, userName, editableNick } = this.state;
 
     return (
         <>
         <View style={styles.container}>
         <View style={styles.header}>
             <Avatar image={image} />
+            <View style={styles.contentIconEdit}>
+                <TextInput value={userName} onChange={(userName) => this.setState({ userName})} editable={editableNick}
+                onFocusInput={() => this.focus('nick')}
+                ></TextInput>
+                <TouchableOpacity  onPress={() => { this._editNick() }} style={styles.iconEdit} ><FontAwesomeIcon icon={ faEdit } /></TouchableOpacity>
+            </View>
         </View>
             <View style={styles.containerOptions}>
             <ScrollView>
