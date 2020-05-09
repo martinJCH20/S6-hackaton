@@ -12,11 +12,13 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
-  TextInput
+  TextInput,
+  Alert
 } from 'react-native';
 
 //import { LinearGradient } from 'expo-linear-gradient';
 import Input from './src/Components/Forms/InputHack';
+import Avatar from './src/Components/Forms/Avatar';
 import DatePicker from 'react-native-datepicker'
 import { faUser, faEnvelope, faMobile, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
@@ -27,11 +29,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#DCDEE1',
         height: '100%'
       },
-    header: {        
+    header: {   
         position:'absolute',
         backgroundColor: '#cb60b3',
         height: '35%',
         width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center' 
     },
     containerOptions: {
         position:'absolute',
@@ -56,6 +60,8 @@ const styles = StyleSheet.create({
     }
 })
 
+const image = { uri: "https://img.pngio.com/avatar-icon-png-105-images-in-collection-page-3-avatarpng-512_512.png" };
+
 export default class App extends Component {
     constructor(props){
         super(props);
@@ -66,13 +72,15 @@ export default class App extends Component {
           date: ''
         }
       }
+
 render(){
     const { user, email, phoneNumber, date } = this.state;
+
     return (
         <>
         <View style={styles.container}>
         <View style={styles.header}>
-            
+            <Avatar image={image} />
         </View>
             <View style={styles.containerOptions}>
             <ScrollView>
