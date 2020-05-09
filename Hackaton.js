@@ -27,16 +27,17 @@ const styles = StyleSheet.create({
     header: {        
         position:'absolute',
         backgroundColor: '#cb60b3',
-        height: '40%',
+        height: '35%',
         width: '100%',
     },
     containerOptions: {
         position:'absolute',
         backgroundColor: '#FFFFFF',
-        height: '70%',
-        width: '80%',
-        marginLeft: '10%',
-        marginRight: '10%',
+        height: '80%',
+        width: '90%',
+        marginTop: '40%',
+        marginLeft: '5%',
+        marginRight: '5%',
         zIndex: 100
     }
 })
